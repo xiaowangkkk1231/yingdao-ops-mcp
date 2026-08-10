@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>影刀运行分析汇报示例</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2937;
+      --muted: #64748b;
+      --line: #dbe3ec;
+      --surface: #ffffff;
+      --soft: #f4f7fa;
+      --brand: #176b87;
+      --danger: #b42318;
+      --warning: #9a6700;
+      --success: #18794e;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eef2f6;
+      color: var(--ink);
+      font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+    .page { max-width: 1240px; margin: 0 auto; padding: 28px 20px 48px; }
+    .header { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 22px; }
+    h1, h2, h3 { margin: 0; line-height: 1.25; }
+    h1 { font-size: 26px; letter-spacing: 0; }
+    h2 { font-size: 19px; margin-bottom: 14px; }
+    h3 { font-size: 15px; margin: 18px 0 8px; }
+    .subtitle, .meta, .note { color: var(--muted); }
+    .badge { display: inline-block; padding: 4px 9px; border: 1px solid #f2c879; background: #fff8e6; color: var(--warning); border-radius: 5px; font-size: 12px; white-space: nowrap; }
+    .section { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; padding: 20px; margin-top: 16px; box-shadow: 0 1px 2px rgba(31, 41, 55, .04); }
+    .section > .section-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .metric { background: var(--soft); border: 1px solid var(--line); border-radius: 5px; padding: 13px; }
+    .metric-label { color: var(--muted); font-size: 12px; }
+    .metric-value { display: block; font-size: 22px; font-weight: 700; margin-top: 3px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: var(--soft); color: #475569; font-size: 12px; font-weight: 600; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    .status { display: inline-block; border-radius: 4px; padding: 2px 7px; font-size: 12px; }
+    .ok { color: var(--success); background: #eaf7f0; }
+    .bad { color: var(--danger); background: #fff0ef; }
+    .warn { color: var(--warning); background: #fff8e6; }
+    .callout { border-left: 3px solid var(--brand); background: #f1f8fb; padding: 11px 13px; margin-top: 13px; }
+    .recommendation { color: #334155; min-width: 260px; }
+    .footer { color: var(--muted); text-align: center; margin-top: 24px; font-size: 12px; }
+    @media (max-width: 800px) {
+      .header { display: block; }
+      .badge { margin-top: 10px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section { overflow-x: auto; }
+      table { min-width: 720px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div>
+        <h1>影刀运行分析汇报</h1>
+        <div class="subtitle">六类 MCP 数据汇报模板示例</div>
+      </div>
+      <span class="badge">虚构示例数据，不代表真实查询结果</span>
+    </header>
+
+    <section class="section">
+      <div class="section-head"><h2>1. 执行记录</h2><span class="meta">2026-01-08 · 第 1 / 1 页</span></div>
+      <div class="grid">
+        <div class="metric"><span class="metric-label">记录总数</span><strong class="metric-value">3</strong></div>
+        <div class="metric"><span class="metric-label">完成</span><strong class="metric-value">2</strong></div>
+        <div class="metric"><span class="metric-label">异常</span><strong class="metric-value">1</strong></div>
+        <div class="metric"><span class="metric-label">机器人</span><strong class="metric-value">2</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>应用</th><th>状态</th><th>执行记录 ID</th><th>创建/触发时间</th><th>机器人</th></tr></thead>
+        <tbody>
+          <tr><td>示例-订单同步</td><td><span class="status ok">完成</span></td><td>demo-inst-001</td><td>2026-01-08 09:30:00</td><td>DEMO-BOT-A</td></tr>
+          <tr><td>示例-库存检查</td><td><span class="status bad">异常</span></td><td>demo-inst-002</td><td>2026-01-08 09:10:00</td><td>DEMO-BOT-B</td></tr>
+          <tr><td>示例-报表生成</td><td><span class="status ok">完成</span></td><td>demo-inst-003</td><td>2026-01-08 08:45:00</td><td>DEMO-BOT-A</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>2. 执行任务详情</h2><span class="meta">demo-inst-002 · DEMO-BOT-B</span></div>
+      <div class="grid">
+        <div class="metric"><span class="metric-label">任务总数</span><strong class="metric-value">3</strong></div>
+        <div class="metric"><span class="metric-label">完成任务</span><strong class="metric-value">2</strong></div>
+        <div class="metric"><span class="metric-label">异常任务</span><strong class="metric-value">1</strong></div>
+        <div class="metric"><span class="metric-label">详情资料</span><strong class="metric-value">2 / 3</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>任务 ID</th><th>状态</th><th>开始时间</th><th>结束时间</th><th>运行时长</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>demo-job-001</td><td><span class="status ok">完成</span></td><td>09:10:01</td><td>09:10:06</td><td>5 秒</td><td>正常完成</td></tr>
+          <tr><td>demo-job-002</td><td><span class="status ok">完成</span></td><td>09:10:06</td><td>09:10:20</td><td>14 秒</td><td>正常完成</td></tr>
+          <tr><td>demo-job-003</td><td><span class="status bad">异常</span></td><td>09:10:20</td><td>09:10:23</td><td>3 秒</td><td>示例数据库连接超时</td></tr>
+        </tbody>
+      </table>
+      <p class="note">云日志可用，云录屏不可用；截图地址未在示例页面展示。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>3. 应用运行统计</h2><span class="meta">2026-01-01 至 2026-01-07</span></div>
+      <div class="grid">
+        <div class="metric"><span class="metric-label">应用总数</span><strong class="metric-value">4</strong></div>
+        <div class="metric"><span class="metric-label">有运行记录</span><strong class="metric-value">3</strong></div>
+        <div class="metric"><span class="metric-label">总运行次数</span><strong class="metric-value">120</strong></div>
+        <div class="metric"><span class="metric-label">总运行时长</span><strong class="metric-value">860.50</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>应用</th><th>负责人</th><th>发布状态</th><th class="num">运行次数</th><th class="num">运行时长</th></tr></thead>
+        <tbody>
+          <tr><td>示例-订单同步</td><td>示例用户甲</td><td><span class="status ok">已发布</span></td><td class="num">60</td><td class="num">420.00</td></tr>
+          <tr><td>示例-库存检查</td><td>示例用户乙</td><td><span class="status ok">已发布</span></td><td class="num">40</td><td class="num">310.50</td></tr>
+          <tr><td>示例-报表生成</td><td>示例用户甲</td><td><span class="status warn">草稿</span></td><td class="num">20</td><td class="num">130.00</td></tr>
+        </tbody>
+      </table>
+      <p class="note">运行时长单位：接口未返回单位，页面保留 API 原始值。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>4. 运行总汇</h2><span class="meta">2026-01-01 至 2026-01-07</span></div>
+      <div class="grid">
+        <div class="metric"><span class="metric-label">总运行次数</span><strong class="metric-value">120</strong></div>
+        <div class="metric"><span class="metric-label">总运行时长</span><strong class="metric-value">860.50</strong></div>
+        <div class="metric"><span class="metric-label">平均每次</span><strong class="metric-value">7.17</strong></div>
+        <div class="metric"><span class="metric-label">日均次数</span><strong class="metric-value">17.1</strong></div>
+      </div>
+      <div class="callout">本周期平均每天运行约 17.1 次；运行时长单位未由接口提供，以上数值为 API 原始值。</div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>5. 每日运行趋势</h2><span class="meta">最近 7 天</span></div>
+      <div class="grid">
+        <div class="metric"><span class="metric-label">周期运行时长</span><strong class="metric-value">860.50</strong></div>
+        <div class="metric"><span class="metric-label">日均运行时长</span><strong class="metric-value">122.93</strong></div>
+        <div class="metric"><span class="metric-label">最高日期</span><strong class="metric-value" style="font-size:16px">01-06</strong></div>
+        <div class="metric"><span class="metric-label">最高日时长</span><strong class="metric-value">155.00</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>日期</th><th class="num">当日运行时长</th><th class="num">累计运行时长</th><th class="num">较前一日</th></tr></thead>
+        <tbody>
+          <tr><td>2026-01-01</td><td class="num">100.00</td><td class="num">100.00</td><td class="num">-</td></tr>
+          <tr><td>2026-01-02</td><td class="num">110.00</td><td class="num">210.00</td><td class="num">+10.0%</td></tr>
+          <tr><td>2026-01-03</td><td class="num">120.50</td><td class="num">330.50</td><td class="num">+9.5%</td></tr>
+          <tr><td>2026-01-04</td><td class="num">115.00</td><td class="num">445.50</td><td class="num">-4.6%</td></tr>
+          <tr><td>2026-01-05</td><td class="num">130.00</td><td class="num">575.50</td><td class="num">+13.0%</td></tr>
+          <tr><td>2026-01-06</td><td class="num">155.00</td><td class="num">730.50</td><td class="num">+19.2%</td></tr>
+          <tr><td>2026-01-07</td><td class="num">130.00</td><td class="num">860.50</td><td class="num">-16.1%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">最近 7 天计算已排除接口返回的基线点。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>6. 应用运行异常</h2><span class="meta">按异常任务 startTime · 2026-01-01 至 2026-01-07</span></div>
+      <div class="grid">
+        <div class="metric"><span class="metric-label">异常任务</span><strong class="metric-value">14</strong></div>
+        <div class="metric"><span class="metric-label">受影响应用</span><strong class="metric-value">3</strong></div>
+        <div class="metric"><span class="metric-label">错误类型</span><strong class="metric-value">4</strong></div>
+        <div class="metric"><span class="metric-label">异常时长</span><strong class="metric-value">2.35 小时</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>错误原因</th><th class="num">次数</th><th>影响应用</th><th>推荐解决方案</th></tr></thead>
+        <tbody>
+          <tr><td>示例页面元素未找到</td><td class="num">6</td><td>示例-库存检查</td><td class="recommendation">更新定位器，增加显式等待和备用定位规则。</td></tr>
+          <tr><td>示例接口请求超时</td><td class="num">4</td><td>示例-订单同步</td><td class="recommendation">设置分级超时和退避重试，记录响应状态。</td></tr>
+          <tr><td>示例数据字段为空</td><td class="num">3</td><td>示例-库存检查、示例-报表生成</td><td class="recommendation">增加非空校验，为可选字段设置默认值。</td></tr>
+          <tr><td>示例磁盘空间不足</td><td class="num">1</td><td>示例-报表生成</td><td class="recommendation">清理临时文件并配置剩余空间告警。</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>处理优先级：</strong>先处理页面元素定位问题，其次完善接口重试和空值校验，最后建立磁盘清理与告警。</div>
+    </section>
+
+    <footer class="footer">示例页面仅用于展示 HTML 汇报布局；请使用 MCP 查询结果替换示例值。</footer>
+  </main>
+</body>
+</html>

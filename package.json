@@ -1,0 +1,19 @@
+{
+  "name": "yingdao-ops-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "auth": "node src/auth-cli.mjs",
+    "import-capture-env": "node scripts/import-capture-env.mjs",
+    "mcp": "node src/mcp-server.mjs",
+    "ops": "node src/ops-cli.mjs",
+    "verify-capture": "node scripts/verify-captured-login.mjs",
+    "verify-mcp": "node scripts/verify-mcp.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.4.3"
+  }
+}

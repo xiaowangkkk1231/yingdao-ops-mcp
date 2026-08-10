@@ -1,0 +1,11 @@
+interface:
+  display_name: "影刀运行分析"
+  short_description: "查询影刀实时运行数据并分析应用、机器人、运行时长和异常原因"
+  default_prompt: "使用 $yingdao-operations-analysis 统计最近 7 天的应用运行异常并给出处理优先级。"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "yingdao_ops"
+      description: "只读查询影刀执行记录、异常详情和运行统计"
+      transport: "stdio"

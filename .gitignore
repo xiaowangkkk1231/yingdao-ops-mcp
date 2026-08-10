@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+*.log
+*.har
+*.bak
+*.bak-*
+node_modules/
+.skill-validator-deps/
+.codex/
