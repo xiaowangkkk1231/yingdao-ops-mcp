@@ -1,0 +1,26 @@
+影刀控制台 Skill 完整分享版 — 使用说明
+
+本包包含 MCP 服务端、CLI、Skill、报告模板和离线测试。
+本项目不提供发起方的账号、密码、Basic 认证值、Token 或本机配置；公开提交历史已脱敏。
+
+1. 安装 Node.js 22 或更高版本及 npm，解压后进入本目录。
+2. 运行 npm ci 安装 package-lock.json 锁定的依赖。
+3. 运行 Copy-Item .env.example .env，编辑 .env，填入接收方自己的认证信息。
+   - 账号方式：填写 YINGDAO_USERNAME、YINGDAO_BASIC_AUTH，以及明文密码或加密密码之一。
+   - 明文密码放 YINGDAO_PASSWORD；使用加密密码时，删除或留空明文密码行，启用 YINGDAO_ENCRYPTED_PASSWORD。
+   - Token 方式：只配置自己的 YINGDAO_ACCESS_TOKEN；其余认证行删除或留空。
+   - YINGDAO_BASIC_AUTH 是登录客户端 Basic 凭据，不是将账号密码做 Base64 编码；请通过自己获授权的登录环境配置。
+   - 加密密码也是登录凭据，不能随文件对外分发。
+4. 离线测试：npm test。
+5. 登录验证（会访问线上服务，不显示 Token）：node --env-file=.env src/auth-cli.mjs
+6. MCP 配置参照 README.md，将 D:/path/to/yingdao-ops-mcp 替换为解压后的实际绝对路径。
+7. 将 skills/yingdao-operations-analysis 目录安装到所用客户端的 Skill 目录。
+   在 Codex 中通常可复制到当前用户 .codex/skills/ 目录；重启客户端后使用。
+8. MCP 在线验证：npm run verify-mcp（会查询接收方账号的数据）。
+
+CLI 手动运行时需加载本人的 .env，例如：
+node --env-file=.env src/ops-cli.mjs daily-runtime '{"days":7}'
+README 中的直接 CLI 命令假定认证变量已注入环境；npm run auth 同样需要事先注入环境变量，或使用上面的 --env-file 方式。
+
+本包未包含 node_modules，接收方需自行安装依赖。
+报告示例均为虚构数据。详情见 README.md。
